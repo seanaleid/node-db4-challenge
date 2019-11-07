@@ -4,7 +4,7 @@ exports.up = function(knex) {
         // The type of the Primary Key is: integer without negative values, also called unsigned 
         tbl.increments(); 
 
-        tbl.float('quantity').notNullable()
+        tbl.float('ingredient_quantity').notNullable()
         tbl.string('unit', 255);
     })
     .createTable('ingredients', tbl => {

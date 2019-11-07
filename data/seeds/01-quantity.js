@@ -1,13 +1,9 @@
 
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('table_name').del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
-      ]);
-    });
+  return knex('quantity').insert([
+    {ingredient_quantity: 1, unit: 'cup'}, // 1
+    {ingredient_quantity: 2, unit: 'tablespoons'}, // 2
+    {ingredient_quantity: 1, unit: 'kilogram'}, // 3
+    {ingredient_quantity: 1, unit: 'pound'} // 4
+  ]);
 };
