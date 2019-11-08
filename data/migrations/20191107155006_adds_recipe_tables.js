@@ -5,16 +5,16 @@ exports.up = function(knex) {
         tbl.increments(); 
 
         tbl.float('ingredient_quantity').notNullable()
-        tbl.string('unit', 255);
+        tbl.string('quantity_unit', 255);
     })
     .createTable('ingredients', tbl => {
         tbl.increments();
 
-        tbl.string('name', 255)
+        tbl.string('ingredient_name', 255)
         .notNullable();
         
         // Define our Foreign Keys
-        tbl
+        tbl 
             .integer('quantity_id')
             .unsigned()
             .references('id')
