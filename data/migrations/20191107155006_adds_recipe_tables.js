@@ -4,17 +4,17 @@ exports.up = function(knex) {
         // The type of the Primary Key is: integer without negative values, also called unsigned 
         tbl.increments(); 
 
-        tbl.float('quantity').notNullable()
-        tbl.string('unit', 255);
+        tbl.float('ingredient_quantity').notNullable()
+        tbl.string('quantity_unit', 255);
     })
     .createTable('ingredients', tbl => {
         tbl.increments();
 
-        tbl.string('name', 255)
+        tbl.string('ingredient_name', 255)
         .notNullable();
         
         // Define our Foreign Keys
-        tbl
+        tbl 
             .integer('quantity_id')
             .unsigned()
             .references('id')
@@ -33,6 +33,13 @@ exports.up = function(knex) {
 
         tbl.string('step', 255)
             .notNullable();
+        tbl
+            .integer('recipe_id')
+            .unsigned()
+            .references('id')
+            .inTable('recipes')
+            .onDelete('RESTRICT')
+            .onUpdate('CASCADE')
     })
     .createTable('recipe_ingredients', tbl => {
         tbl.increments();
@@ -61,6 +68,13 @@ exports.up = function(knex) {
             .inTable('instructions')
             .onDelete('RESTRICT')
             .onUpdate('CASCADE')
+        tbl 
+            .integer('quantity_id')
+            .unsigned()
+            .references('id')
+            .inTable('quantity')
+            .onDelete('RESTRICT') 
+            .onUpdate('CASCADE') 
     })
 };
 
