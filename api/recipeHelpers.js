@@ -39,6 +39,22 @@ join quantity as q on i.quantity_id = q.id
 where r.id = 1;
 */
 
+
+function getShoppingList(recipe_id) {
+return db("recipe_ingredients as ri")
+    .select(
+    "recipes.name",
+    "ingredients.ingredient_name",
+    "quantity.ingredient_quantity",
+    "quantity.quantity_unit"
+    )
+    .join("recipes", "recipes.id", "ri.recipe_id")
+    .join("quantity", "quantity.id", "ri.quantity_id")
+    .join("ingredients", "ingredients.id", "ri.ingredients_id")
+    .where({ recipe_id });
+}
+
+
 /* Works in SQLite Studio
 select i.step as Instructions
 from recipe_ingredients as ri
