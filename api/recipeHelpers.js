@@ -3,7 +3,8 @@ const db = require('../dbConfig.js');
 module.exports = {
     getRecipes,
     getRecipeById,
-    getShoppingList
+    getShoppingList,
+    getInstructions
 }
 
 function getRecipes() {
@@ -61,3 +62,10 @@ from recipe_ingredients as ri
 join instructions as i on ri.instructions_id = i.id
 where ri.recipe_id = 1;
 */
+
+function getInstructions(recipe_id) {
+    return db("instructions as i")
+        .select("recipes.name", "i.step")
+        .join("recipes", "recipes.id", "i.recipe_id")
+        .where({ recipe_id });
+    }

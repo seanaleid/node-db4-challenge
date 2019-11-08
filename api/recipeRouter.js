@@ -46,4 +46,22 @@ router.get('/:id/ingredients', (req, res) => {
         res.status(500).json({ message: 'Failed to get the shopping list' });
     });
 })
+
+
+router.get('/:id/instructions', (req, res) => {
+    // const {id} = req.params;
+
+    recipes.getInstructions(req.params.id)
+    .then(id => {
+        if (id.length) {
+            res.json(id);
+        } else {
+        res.status(404).json({ message: 'Could not find the shopping list with the given id.' })
+        }
+    })
+    .catch(err => {
+        res.status(500).json({ message: 'Failed to get the shopping list' });
+    });
+})
+
 module.exports = router;
